@@ -1,0 +1,162 @@
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass {
+    color: rgb(255, 98, 0);
+    font-size: 2rem;
+}
+
+.fa-compass:hover {
+    color: rgb(255, 98, 0);
+    font-size: 2.2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+.navbar-nav {
+    background-color: white !important;
+}
+
+/* Update your body selector */
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /*Forces body to take full screen height*/
+    margin: 0;
+}
+
+/* Update your container (the middle part) */
+.container {
+    flex: 1;
+    /* This makes the container take up all remaining space */
+}
+
+.f-info {
+    display: flex;
+    background-color: #ebebeb;
+    border-top: 1px solid rgba(128, 128, 128, 0.394);
+    padding: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.f-info-social,
+.f-info-links,
+.f-info-title {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-social {
+    height: 2rem;
+}
+
+.f-info-social i {
+    margin: 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.f-info-social i:hover {
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+}
+
+.f-info-title {
+    margin: 0.2rem 0;
+    font-weight: 700;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+    margin: 0 0.6rem;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+    color: #222222;
+    margin: 0 0.6rem;
+}
+
+
+/* Card */
+
+.card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-body p {
+    font-weight: 400 !important;
+}
+
+.listing-link{
+    text-decoration: none;
+}
+
+ 
+/* gives hover effect to the card */
+.card-img-overlay{
+    opacity: 0;
+}
+
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+.post-btn{
+    background-color: rgb(255, 98, 0) !important;
+    border: none !important;
+}
+
+.post-btn:hover{
+    background-color: rgba(235, 127, 91, 0.776) !important;
+}
+
+.edit-btn{
+    background-color: rgb(246, 121, 44) !important;
+    border: none !important;
+}
+
+.edit-btn:hover{
+    background-color: rgba(235, 127, 91, 0.776) !important;
+}
+
+
+
+/* Show */
+.show-img{
+    height: 45vh;
+    width: 100% ;
+    object-fit: cover;   /* fills without distortion */
+    border-radius: 1rem;
+}
+
+.delete-btn:hover{
+    background-color: rgba(223, 88, 44, 0.972) !important;
+}
+
+.show-btns{
+    display: flex;
+}

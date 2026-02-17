@@ -1,0 +1,53 @@
+<% layout('layouts/boilerplate') %>
+    <div class="row  mt-3">
+        <div class="col-8 offset-2">
+            <br>
+            <h2>Create a new Listing</h2>
+            <br>
+            <form action="/listings" method="POST" class="form-new needs-validation" novalidate> 
+                <div class="mb-3">
+                    <label for="title" class="form-label"><b>Title :</b></label>
+                    <input type="text" name="title" placeholder="enter title" class="form-control" id="title" required>
+                    <div class="valid-feedback">Title looks good</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label"><b>Description :</b></label>
+                    <textarea name="description" placeholder="give description" rows="8" cols="50" class="form-control"
+                        id="description"  required></textarea>
+                    <div class="invalid-feedback">Give a short description</div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label"><b>Price :</b></label>
+                        <input name="price" placeholder="enter price" class="form-control" id="price"  required>
+                        <div class="invalid-feedback">Enter valid price</div>
+
+                    </div>
+
+                    <div class="mb-3 col-md-8">
+                        <label for="image" class="form-label"><b>Image URL :</b></label>
+                        <input type="text" name="image[url]" placeholder="enter image url" class="form-control" id="image">
+                        <div class="invalid-feedback">Provide image URL</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label"><b>Location :</b></label>
+                    <input type="text" name="location" placeholder="enter location" class="form-control" id="location" required>
+                    <div class="invalid-feedback">Provide location</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="country" class="form-label"><b>Country :</b></label>
+                    <input type="text" name="country" placeholder="enter country" class="form-control" id="country" required>
+                    <div class="invalid-feedback">Mention country</div>
+                </div>
+
+                <button class="btn btn-dark post-btn mt-3">POST</button>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
