@@ -92,14 +92,16 @@ app.get("/listings/:id/edit", wrapAsync(async (req, res) => {
 // UPDATE
 app.put("/listings/:id",validateSchema, wrapAsync(async (req, res) => {
     const { id } = req.params;
-    let { title, description, price, location, image, country } = req.body;
+    const { title, description, price, location, country } = req.body;
+    // image already normalized by middleware to object
+    const image = req.body.image;
 
-    const listing = await Listing.findByIdAndUpdate(id, {
+    await Listing.findByIdAndUpdate(id, {
         title,
         description,
         price,
         location,
-        image: { url: image },
+        image,
         country
     });
 
