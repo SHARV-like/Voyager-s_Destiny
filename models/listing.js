@@ -1,7 +1,7 @@
 const { ref } = require("joi");
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
-const Review = require("./review");
+const Review = require("./review.js");
 
 const listingSchema = new mongoose.Schema({
     title: {
@@ -26,6 +26,14 @@ const listingSchema = new mongoose.Schema({
             ref : "Review"
         }
     ]
+})
+
+// ================= MOGOOSE MIDDLEWARE =================
+listingSchema.post('findOneAndDelete', async (listing) => {
+    if(listing.reviews.length){
+        await Review.deleteMany({_id : {$in : listing.reviews}})
+        console.log("Post middleware executed");
+    }
 })
 
 const Listing = mongoose.model("Listing", listingSchema);
