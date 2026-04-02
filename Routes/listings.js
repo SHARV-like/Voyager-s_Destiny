@@ -45,6 +45,7 @@ router.post("/", validateListing, wrapAsync(async (req, res) => {
     const newListing = new Listing(req.body);
     console.log(req.body)
     await newListing.save();
+    req.flash("success", "Listing created successfully");
     res.redirect("/listings");
 }));
 
@@ -75,7 +76,7 @@ router.put("/:id",validateListing, wrapAsync(async (req, res) => {
         image,
         country
     });
-
+    req.flash("update", "Listing updated successfully");
     res.redirect(`/listings/${id}`);
 }));
 
@@ -83,6 +84,7 @@ router.put("/:id",validateListing, wrapAsync(async (req, res) => {
 router.delete("/:id", wrapAsync(async (req, res) => {
     const { id } = req.params;
     await Listing.findByIdAndDelete(id);
+    req.flash("del", "Listing deleted successfully");
     res.redirect("/listings");
 }));
 

@@ -13,6 +13,7 @@ const app = express();
 const listingRouter = require("./Routes/listings.js")
 const postRouter = require("./Routes/reviews.js")
 const  session = require("express-session");
+const flash = require("connect-flash");
 
 // ================= SETUP =================
 app.set("views", path.join(__dirname, "views"));
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+
 
 // ================= DATABASE =================
 main()
@@ -37,8 +39,21 @@ async function main() {
 app.use(session({
     secret : "my_secret_key",
     resave : false,
-    saveUninitialized : true
-}))
+    saveUninitialized : true,
+    cookie:{
+        maxAge : 7 * 24 * 60 * 60 * 1000,
+        httpOnly : true
+    }
+}));
+
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.update = req.flash("update");
+    res.locals.del = req.flash("del");
+    next();
+})
 // ================= ROUTES =================
 
 // Root
