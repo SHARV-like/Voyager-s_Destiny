@@ -12,6 +12,7 @@ const ExpressError = require("./utils/expressError.js");
 const app = express();
 const listingRouter = require("./Routes/listings.js")
 const postRouter = require("./Routes/reviews.js")
+const  session = require("express-session");
 
 // ================= SETUP =================
 app.set("views", path.join(__dirname, "views"));
@@ -32,6 +33,12 @@ async function main() {
     await mongoose.connect("mongodb://127.0.0.1:27017/voyagersdestiny");
 }
 
+// ================= MIDDLEWARES ============
+app.use(session({
+    secret : "my_secret_key",
+    resave : false,
+    saveUninitialized : true
+}))
 // ================= ROUTES =================
 
 // Root
@@ -53,9 +60,9 @@ app.use((req, res, next) => {
 
 // ================= ERROR MIDDLEWARE =================
 app.use((err, req, res, next) => {
-    let { status = 500, message = "Something went wrong" } = err;
+    console.error(err.stack);
+    let { status = 500, message = "Internal Server Error" } = err;
     res.status(status).render("error.ejs", { message });
-    // res.status(status).send(message);
 });
 
 // ================= SERVER =================
