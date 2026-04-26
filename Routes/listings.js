@@ -56,10 +56,10 @@ router.get("/:id/edit", wrapAsync(async (req, res) => {
     const listing = await Listing.findById(id);
 
     if (!listing) {
-        throw new ExpressError(404, "Listing not found");
+        throw next(new ExpressError(404, "Listing not found"));
     }
 
-    res.render("listings/edit.ejs", { listing });
+     return res.render("listings/edit.ejs", { listing });
 }));
 
 // UPDATE

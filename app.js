@@ -43,7 +43,7 @@ async function main() {
 app.use(session({
     secret : "my_secret_key",
     resave : false,
-    saveUninitialized : true,
+    saveUninitialized : false,
     cookie:{
         maxAge : 7 * 24 * 60 * 60 * 1000,
         httpOnly : true
@@ -98,7 +98,7 @@ app.use("/", userRouter);
 
 
 // ================= 404 HANDLER =================
-app.use((req, res, next) => {
+app.use("*", (req, res, next) => {
     console.log(req.url);
     next(new ExpressError(404, "Page Not Found"));
 });
