@@ -12,8 +12,12 @@ const ExpressError = require("./utils/expressError.js");
 const app = express();
 const listingRouter = require("./Routes/listings.js")
 const postRouter = require("./Routes/reviews.js")
+const userRouter = require("./Routes/users.js");
 const  session = require("express-session");
 const flash = require("connect-flash");
+const User = require("./models/user.js");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 
 // ================= SETUP =================
 app.set("views", path.join(__dirname, "views"));
@@ -48,6 +52,14 @@ app.use(session({
 
 app.use(flash());
 
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
@@ -57,20 +69,37 @@ app.use((req, res, next) => {
 })
 // ================= ROUTES =================
 
+// Prevent browser favicon request from triggering 404 error
+app.get('/favicon.ico', (req, res) => res.status(204));
+
 // Root
 app.get("/", (req, res) => {
     res.send("Hi I am root");
 });
 
+app.get("/register", async (req,res) =>{
+    let fakeUser = new User({
+        email : "email@gmail.com",
+        username : "Sharv"
+    })
+
+    let newUser = await User.register(fakeUser, "mypassword");
+    res.send(newUser);
+
+})
 // LISTINGS
 app.use("/listings", listingRouter);
 
 // REVIEWS
 app.use("/listings/:id/reviews", postRouter);
 
+// USERS
+app.use("/", userRouter);
+
 
 // ================= 404 HANDLER =================
 app.use((req, res, next) => {
+    console.log(req.url);
     next(new ExpressError(404, "Page Not Found"));
 });
 
