@@ -1,0 +1,99 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row justify-content-center">
+    <div class="col-12 text-center">
+        <br />
+
+        <h2 class="fs-2 fw-bold">
+            Sign-Up on Voyager's Destiny :
+        </h2>
+
+        <h6 class="card-subtitle mb-2 text-muted small">
+            Join the world of premium stays and travel experiences
+        </h6>
+
+        <hr />
+        <br />
+    </div>
+</div>
+
+<div class="row mb-5 mt-2 justify-content-center">
+    <div class="col-md-6 col-lg-5 shadow-lg rounded-4 p-4 bg-white">
+        <form action="/signup" method="post" class="needs-validation" novalidate>
+
+            <div class="mb-3 mt-3">
+                <label for="username" class="form-label">
+                    <b>Username :</b>
+                </label>
+
+                <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="eg. John Doe"
+                    class="form-control"
+                    required
+                />
+
+                <div class="valid-feedback">
+                    Username looks good
+                </div>
+
+                <div class="invalid-feedback">
+                    Username required
+                </div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="email" class="form-label">
+                    <b>Email :</b>
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="eg. john@example.com"
+                    class="form-control"
+                    required
+                />
+
+                <div class="valid-feedback">
+                    Email looks good
+                </div>
+
+                <div class="invalid-feedback">
+                    Email required
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">
+                    <b>Password :</b>
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Enter password"
+                    class="form-control"
+                    required
+                />
+
+                <div class="valid-feedback">
+                    Password looks good
+                </div>
+
+                <div class="invalid-feedback">
+                    Password required
+                </div>
+            </div>
+
+            <button class="btn btn-success mb-3 mt-3 w-100">
+                Sign Up
+            </button>
+
+        </form>
+    </div>
+</div>
