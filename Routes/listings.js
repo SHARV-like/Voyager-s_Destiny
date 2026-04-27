@@ -59,7 +59,7 @@ router.get("/:id/edit", wrapAsync(async (req, res) => {
         throw next(new ExpressError(404, "Listing not found"));
     }
 
-     return res.render("listings/edit.ejs", { listing });
+    return res.render("listings/edit.ejs", { listing });
 }));
 
 // UPDATE
