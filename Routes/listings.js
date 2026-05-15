@@ -5,6 +5,7 @@ const Listing = require("../models/listing");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/expressError");
 const { listingSchema } = require("../schema");
+const { isLoggedIn } = require("../middleware")
 
 // ================= SERVER SIDE VALIDATION =================
 const validateListing = ((req, res,next) => {
@@ -24,11 +25,8 @@ router.get("/", wrapAsync(async (req, res) => {
 }));
 
 // NEW
-router.get("/new", (req, res) => {
-    if (!req.isAuthenticated()){
-        req.flash("error", "You must be logged in for creating a new listing !");
-        return res.redirect("/login")
-    }
+router.get("/new",isLoggedIn, (req, res) => {
+    console.log(req.user);
     res.render("listings/new.ejs");
 });
 
@@ -46,7 +44,7 @@ router.get("/:id", wrapAsync(async (req, res) => {
 }));
 
 // CREATE
-router.post("/", validateListing, wrapAsync(async (req, res) => {
+router.post("/",isLoggedIn, validateListing, wrapAsync(async (req, res) => {
     console.log(req.body)
     const newListing = new Listing(req.body);
     await newListing.save();
@@ -55,7 +53,7 @@ router.post("/", validateListing, wrapAsync(async (req, res) => {
 }));
 
 // EDIT FORM
-router.get("/:id/edit", wrapAsync(async (req, res) => {
+router.get("/:id/edit",isLoggedIn, wrapAsync(async (req, res) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
 
@@ -67,7 +65,7 @@ router.get("/:id/edit", wrapAsync(async (req, res) => {
 }));
 
 // UPDATE
-router.put("/:id",validateListing, wrapAsync(async (req, res) => {
+router.put("/:id",isLoggedIn, validateListing, wrapAsync(async (req, res) => {
     const { id } = req.params;
     const { title, description, price, location, country } = req.body;
     // image already normalized by middleware to object
