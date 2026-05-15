@@ -189,6 +189,7 @@ app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.update = req.flash("update");
     res.locals.del = req.flash("del");
+    res.locals.currUser = req.user;
 
     next();
 });
